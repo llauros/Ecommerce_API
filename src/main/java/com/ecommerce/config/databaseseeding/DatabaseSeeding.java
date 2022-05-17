@@ -8,8 +8,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import com.ecommerce.entities.CategoryEntity;
 import com.ecommerce.entities.ProductEntity;
 import com.ecommerce.entities.UserEntity;
+import com.ecommerce.repositories.CategoryRepository;
 import com.ecommerce.repositories.ProductRepository;
 import com.ecommerce.repositories.UserRepository;
 
@@ -24,13 +26,25 @@ public class DatabaseSeeding implements CommandLineRunner {
 	@Autowired
 	 private ProductRepository productRepository;
 	
+	@Autowired
+	 private CategoryRepository categoryRepository;
+	
+	
 	@Override
 	public void run(String... args) throws Exception {
 
 		UserEntity u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, u17, u18, u19, u20, uAdmin, uTest, uTest2, uTest3, uTest4;
 		String passwordTest = "senhaficticia";
+		
+		CategoryEntity c1, c2, c3;
 		ProductEntity p1, p2, p3, p4, p5, p6;
 		
+		//DATABASE SEEDING FOR CATEGORY
+		c1 = new CategoryEntity("Moda");
+		c2 = new CategoryEntity("Eletrônicos");
+		c3 = new CategoryEntity("Livros");
+		categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
+				
 		// DATABASE SEEDING FOR PRODUCT
 		p1 = new ProductEntity("The Lord of the Rings", "Lorem ipsum dolor amet", new BigDecimal("90.5"), null);
 		p2 = new ProductEntity("Smart TV", "Nulla eu purus. Maecenas ante", new BigDecimal("2190.0"), null);
@@ -38,8 +52,7 @@ public class DatabaseSeeding implements CommandLineRunner {
 		p4 = new ProductEntity("Redmi X3", "The better smartphone.", new BigDecimal("800.99"), null);
 		p5 = new ProductEntity("Hidratante", "Neutrogena matte 3 em 1", new BigDecimal("20.33"), null);
 		p6 = new ProductEntity("Garrafa de agua", "Vendida em Jundiai", new BigDecimal("1555.99"), null);
-				
-		
+		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
 		
 		// DATABASE SEEDING FOR USER
 		u1 = new UserEntity("Henzo Alpuim", "henzo@email.com", passwordTest);
@@ -72,8 +85,6 @@ public class DatabaseSeeding implements CommandLineRunner {
 				"$2a$10$sFKmbxbG4ryhwPNx/l3pgOJSt.fW1z6YcUnuE2X8APA/Z3NI/oSpq");
 		uTest4 = new UserEntity("Jose das Testes", "jose@email.com",
 				"$2a$10$sFKmbxbG4ryhwPNx/l3pgOJSt.fW1z6YcUnuE2X8APA/Z3NI/oSpq");
-		
-		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
 		userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, u17,
 				u18, u19, u20, uAdmin, uTest, uTest2, uTest3, uTest4));
 	}
