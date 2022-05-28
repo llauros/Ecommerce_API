@@ -43,8 +43,6 @@ public class CategoryBaseService implements CategoryService{
 	public Category create(Category model) {
 		CategoryEntity entity = repository.save(new CategoryEntity(model));
 		
-		System.out.println(entity.getId());
-		
 		return entity.toModel();
 	}
 
