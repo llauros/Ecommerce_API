@@ -4,7 +4,8 @@ public class Business {
 	
 	private Long id;
 	private String name;
-	private String description;	
+	private String description;
+	private User ownerUser;
 /*	private String profilePicture;
 	private String bannerImage;
 	private Date createdAt;
@@ -27,6 +28,12 @@ public class Business {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public User getOwnerUser() {
+		return ownerUser;
+	}
+	public void setOwnerUser(User ownerUser) {
+		this.ownerUser = ownerUser;
 	}
 	
 }

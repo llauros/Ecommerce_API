@@ -2,6 +2,7 @@ package com.ecommerce.config.databaseseeding;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -36,28 +37,12 @@ public class DatabaseSeeding implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
+		/*
 		dbsUsers();
-		
 		dbsBusiness();
-
-		dbsCategory();
-		
+		dbsCategory();		
 		dbsProduct();
-
-	}
-
-	/**
-	 * Populando tabela de Usuário com dados fictícios!
-	 */
-	public void dbsUsers() {
-		UserEntity u1, u2, u3, u4, u5, u6, u7, u8, u9, u10, u11, u12, u13, u14, u15, u16, u17, u18, u19, u20, uAdmin, uTest, uTest2, uTest3, uTest4;
-		String passwordTest = "senhaficticia";
-
-		u1 = new UserEntity("Henzo Alpuim", "henzo@email.com", passwordTest);
-		u2 = new UserEntity("Jayden Lagoa", "jayden@email.com", passwordTest);
-		u3 = new UserEntity("Erica Santarem", "erica@email.com", passwordTest);		
-		userRepository.saveAll(Arrays.asList(u1, u2, u3));
+		*/
 	}
 
 	/**
@@ -66,9 +51,11 @@ public class DatabaseSeeding implements CommandLineRunner {
 	public void dbsBusiness() {
 		BusinessEntity b1, b2, b3;
 
-		b1 = new BusinessEntity("Games Eduu", "Conheça a melhor loja de Games");
-		b2 = new BusinessEntity("Americanas", "Tem tudo");
-		b3 = new BusinessEntity("Melissa Cosméticos", "Perfume-se");		
+		List<UserEntity> usersT = userRepository.findAll();
+		
+		b1 = new BusinessEntity("Games Eduu", "Conheça a melhor loja de Games", usersT.get(0));
+		b2 = new BusinessEntity("Americanas", "Tem tudo", usersT.get(1));
+		b3 = new BusinessEntity("Melissa Cosméticos", "Perfume-se", usersT.get(2));		
 		businessRepository.saveAll(Arrays.asList(b1, b2, b3));
 	}
 	
@@ -97,5 +84,19 @@ public class DatabaseSeeding implements CommandLineRunner {
 		p5 = new ProductEntity("Hidratante", "Neutrogena matte 3 em 1", new BigDecimal("20.33"), null);
 		p6 = new ProductEntity("Garrafa de agua", "Vendida em Jundiai", new BigDecimal("1555.99"), null);
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
+	}
+	
+	/**
+	 * Populando tabela de Usuário com dados fictícios!
+	 */
+	public List<UserEntity> dbsUsers() {
+		UserEntity u1, u2, u3;
+		String p = "senha";
+
+		u1 = new UserEntity("Henzo Alpuim", "henzo@email.com", p);
+		u2 = new UserEntity("Jayden Lagoa", "jayden@email.com", p);
+		u3 = new UserEntity("Erica Santarem", "erica@email.com", p);	
+		
+		return userRepository.saveAll(Arrays.asList(u1, u2, u3));
 	}
 }
