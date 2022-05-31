@@ -1,8 +1,6 @@
 package com.ecommerce.services.impl;
 
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -32,11 +30,7 @@ public class UserBaseService implements UserService {
 				Optional<UserEntity> result = repository.findByEmail(user.getEmail());
 				
 				if(result.isEmpty()) {
-					
-					//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-					//String encryptedPassword = encoder.encode(user.getPassword());
 					user.setPassword(user.getPassword());
-					
 					return repository.save(new UserEntity(user)).toModel();
 				}			
 			}
@@ -58,11 +52,7 @@ public class UserBaseService implements UserService {
 			return repository.findById(user.getId()).map(result -> {
 
 				result.setName(user.getName());
-				result.setEmail(user.getEmail());
-				
-				//BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-				//String encryptedPassword = encoder.encode(user.getPassword());
-				
+				result.setEmail(user.getEmail());				
 				result.setPassword(user.getPassword());
 
 				return repository.save(result).toModel();
