@@ -37,12 +37,12 @@ public class DatabaseSeeding implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		/*
+		
 		dbsUsers();
 		dbsBusiness();
 		dbsCategory();		
 		dbsProduct();
-		*/
+		
 	}
 
 	/**
@@ -77,12 +77,14 @@ public class DatabaseSeeding implements CommandLineRunner {
 	public void dbsProduct() {
 		ProductEntity p1, p2, p3, p4, p5, p6;
 
-		p1 = new ProductEntity("The Lord of the Rings", "Lorem ipsum dolor amet", new BigDecimal("90.5"), null);
-		p2 = new ProductEntity("Smart TV", "Nulla eu purus. Maecenas ante", new BigDecimal("2190.0"), null);
-		p3 = new ProductEntity("Macbook Pro", "Nam eleifend maximus tortor", new BigDecimal("1250.0"), null);
-		p4 = new ProductEntity("Redmi X3", "The better smartphone.", new BigDecimal("800.99"), null);
-		p5 = new ProductEntity("Hidratante", "Neutrogena matte 3 em 1", new BigDecimal("20.33"), null);
-		p6 = new ProductEntity("Garrafa de agua", "Vendida em Jundiai", new BigDecimal("1555.99"), null);
+		List<BusinessEntity> b = businessRepository.findAll();
+				
+		p1 = new ProductEntity("The Lord of the Rings", "Lorem ipsum dolor amet", new BigDecimal("90.5"), null, b.get(0));
+		p2 = new ProductEntity("Smart TV", "Nulla eu purus. Maecenas ante", new BigDecimal("2190.0"), null, b.get(0));
+		p3 = new ProductEntity("Macbook Pro", "Nam eleifend maximus tortor", new BigDecimal("1250.0"), null, b.get(0));
+		p4 = new ProductEntity("Redmi X3", "The better smartphone.", new BigDecimal("800.99"), null, b.get(0));
+		p5 = new ProductEntity("Hidratante", "Neutrogena matte 3 em 1", new BigDecimal("20.33"), null, b.get(0));
+		p6 = new ProductEntity("Garrafa de agua", "Vendida em Jundiai", new BigDecimal("1555.99"), null, b.get(0));
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6));
 	}
 	

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.ecommerce.models.Product;
@@ -31,6 +33,10 @@ public class ProductEntity {
 	@Column(name = "foto")
 	private String photo;
 	
+	@ManyToOne
+	@JoinColumn(name = "negocio_id")
+	private BusinessEntity business;
+	
 	public ProductEntity() {}
 	
 	public ProductEntity(Product model) {
@@ -40,11 +46,12 @@ public class ProductEntity {
 		this.photo = model.getPhoto();	
 	}
 	
-	public ProductEntity(String name, String description, BigDecimal price, String photo) {
+	public ProductEntity(String name, String description, BigDecimal price, String photo, BusinessEntity business) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
 		this.photo = photo;
+		this.business = business;
 	}
 	
 	public Long getId() {
@@ -76,7 +83,13 @@ public class ProductEntity {
 	}
 	public void setPhoto(String photo) {
 		this.photo = photo;
-	}	
+	}
+	public BusinessEntity getBusiness() {
+		return business;
+	}
+	public void setBusiness(BusinessEntity business) {
+		this.business = business;
+	}
 
 	public Product toModel() {
 		Product model = new Product();
@@ -86,7 +99,8 @@ public class ProductEntity {
 		model.setDescription(this.description);
 		model.setPrice(this.price);
 		model.setPhoto(this.photo);
-				
+		model.setBusiness(this.business.toModel());
+		
 		return model;
 	}
 }
