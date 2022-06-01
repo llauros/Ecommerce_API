@@ -10,6 +10,8 @@ import com.ecommerce.models.User;
 
 public class UserParameter {
 
+	private Long id;
+	
 	@NotNull @NotEmpty
 	@Length(min = 3, max = 100)
 	private String name;
@@ -21,6 +23,14 @@ public class UserParameter {
 	@NotNull @NotEmpty
 	@Length(min = 8, max = 100)
 	private String password;
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -49,6 +59,7 @@ public class UserParameter {
 	public User toModel() {
 		User model = new User();
 
+		model.setId(this.id);
 		model.setName(this.name);
 		model.setEmail(this.email);
 		model.setPassword(this.password);

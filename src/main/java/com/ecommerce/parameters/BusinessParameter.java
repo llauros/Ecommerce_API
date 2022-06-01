@@ -3,8 +3,10 @@ package com.ecommerce.parameters;
 import com.ecommerce.models.Business;
 
 public class BusinessParameter {
+	
 	private String name;
 	private String description;
+	private UserParameter ownerUser;
 	
 	public String getName() {
 		return name;
@@ -18,6 +20,12 @@ public class BusinessParameter {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public UserParameter getOwnerUser() {
+		return ownerUser;
+	}
+	public void setOwnerUser(UserParameter ownerUser) {
+		this.ownerUser = ownerUser;
+	}
 	
 	public Business toModel() {
 		Business model = new Business();
@@ -25,6 +33,9 @@ public class BusinessParameter {
 		model.setName(this.name);
 		model.setDescription(this.description);
 		
+		if(this.ownerUser != null)
+			model.setOwnerUser(ownerUser.toModel());
+				
 		return model;
 	}
 }

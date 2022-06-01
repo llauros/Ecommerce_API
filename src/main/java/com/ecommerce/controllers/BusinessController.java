@@ -31,10 +31,11 @@ public class BusinessController {
 	public ResponseEntity<List<BusinessPresenter>> findAll() {
 		List<Business> result = this.service.findAll();
 
-		if (result != null) {		
-			return new ResponseEntity(result.stream().map(a -> new BusinessPresenter(a)).collect(Collectors.toList()), HttpStatus.OK);
+		if (result != null) {
+			return new ResponseEntity(result.stream().map(a -> new BusinessPresenter(a)).collect(Collectors.toList()),
+					HttpStatus.OK);
 		}
-		
+
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
@@ -43,41 +44,44 @@ public class BusinessController {
 		Business result = this.service.findById(id);
 
 		if (result != null) {
-			return new ResponseEntity(new BusinessPresenter(result), HttpStatus.OK);	
+			return new ResponseEntity(new BusinessPresenter(result), HttpStatus.OK);
 		}
-		
-		return new ResponseEntity(HttpStatus.NO_CONTENT);		
+
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
 	@PostMapping
 	public ResponseEntity<BusinessPresenter> create(@RequestBody BusinessParameter parameter) {
-		
-		if (parameter != null) {
-			Business model = parameter.toModel();
 
-			return new ResponseEntity(new BusinessPresenter(this.service.create(model)), HttpStatus.CREATED);	
+		if (parameter != null) {
+			
+			Business model = this.service.create(parameter.toModel());
+
+			if(model != null) {
+				return new ResponseEntity(new BusinessPresenter(model), HttpStatus.CREATED);
+			}		
 		}
-		
+
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	@PutMapping("/{id}")
 	public ResponseEntity<BusinessPresenter> update(@PathVariable Long id, @RequestBody BusinessParameter parameter) {
-		
+
 		if (parameter != null) {
-			Business user = parameter.toModel();
-			user.setId(id);
-			
-			Business result = this.service.update(user);
-			
-			if(result != null) {				
+			Business model = parameter.toModel();
+			model.setId(id);
+
+			Business result = this.service.update(model);
+
+			if (result != null) {
 				return new ResponseEntity(new BusinessPresenter(result), HttpStatus.CREATED);
 			} else {
-				return new ResponseEntity(HttpStatus.NO_CONTENT);	
-			}	
+				return new ResponseEntity(HttpStatus.NO_CONTENT);
+			}
 		}
-		
-		return new ResponseEntity(HttpStatus.NO_CONTENT);		
+
+		return new ResponseEntity(HttpStatus.NO_CONTENT);
 	}
 
 	@DeleteMapping("/{id}")
