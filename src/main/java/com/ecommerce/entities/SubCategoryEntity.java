@@ -21,6 +21,8 @@ public class SubCategoryEntity {
 	@Column(name = "nome", length = 100)
 	private String name;
 	
+	//private List<Product> products; 
+	
 	public SubCategoryEntity() {}
 	
 	public SubCategoryEntity (SubCategory model) {
@@ -28,7 +30,7 @@ public class SubCategoryEntity {
 		this.name = model.getName();
 	}	
 	
-	public SubCategoryEntity (String name, Category model) {
+	public SubCategoryEntity (String name) {
 		this.name = name;
 	}
 	
@@ -44,6 +46,12 @@ public class SubCategoryEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
+	/*public List<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}*/
 
 	public SubCategory toModel() {
 		SubCategory model = new SubCategory();

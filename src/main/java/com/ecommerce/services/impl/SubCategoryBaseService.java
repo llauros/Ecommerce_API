@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ecommerce.entities.CategoryEntity;
 import com.ecommerce.entities.SubCategoryEntity;
 import com.ecommerce.models.SubCategory;
 import com.ecommerce.repositories.CategoryRepository;
@@ -51,17 +50,6 @@ public class SubCategoryBaseService implements SubCategoryService {
 			SubCategoryEntity entity = new SubCategoryEntity(model);
 			
 			return repository.save(entity).toModel();
-			
-			
-			/*if(model.getCategory() != null) {
-				Optional<CategoryEntity> categoryEntity = categoryRepository.findById(model.getCategory().getId());
-				
-				if(categoryEntity.isPresent()) {
-					entity.setCategory(categoryEntity.get());
-					
-					return repository.save(entity).toModel();
-				}				
-			}*/	
 		}
 
 		return null;
@@ -69,24 +57,16 @@ public class SubCategoryBaseService implements SubCategoryService {
 
 	@Override
 	public SubCategory update(SubCategory model) {
-		CategoryEntity category = null;
-		
-		/*return repository.findById(model.getId()).map( result -> {		
+			
+		return repository.findById(model.getId()).map( result -> {
 			
 			result.setName(model.getName());
-			if (model.getCategory() != null) {
-				Optional<CategoryEntity> categoryEntity = categoryRepository.findById(model.getCategory().getId());
-				
-				if(categoryEntity.isPresent()) {
-					result.setCategory(categoryEntity.get());
-				}
-			}
 			
 			return repository.save(result).toModel();
 		}).orElseGet(() -> {
 			return null;
-		});*/
-		return null;
+		});
+		
 	}
 	
 	@Override
