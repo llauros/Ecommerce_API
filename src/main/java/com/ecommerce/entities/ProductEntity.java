@@ -1,6 +1,9 @@
 package com.ecommerce.entities;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -37,16 +42,27 @@ public class ProductEntity {
 	@JoinColumn(name = "negocio_id")
 	private BusinessEntity business;
 	
+	@ManyToMany
+	@JoinTable(name = "tb_produto_subcategoria",
+		joinColumns = @JoinColumn(name = "id_produto"),
+		inverseJoinColumns = @JoinColumn(name = "id_subcategoria"))
+	private Set<SubCategoryEntity> subCategories = new HashSet<>();
+	
 	public ProductEntity() {}
 	
 	public ProductEntity(Product model) {
 		this.name = model.getName();
 		this.description = model.getDescription();
 		this.price = model.getPrice();
-		this.photo = model.getPhoto();	
+		this.photo = model.getPhoto();
+		if(model.getSubCategories() != null) {
+			this.subCategories = model.getSubCategories().stream()
+					.map(a -> new SubCategoryEntity(a)).collect(Collectors.toSet());
+		}
 	}
 	
-	public ProductEntity(String name, String description, BigDecimal price, String photo, BusinessEntity business) {
+	public ProductEntity(String name, String description, BigDecimal price, String photo,
+			BusinessEntity business) {
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -90,6 +106,12 @@ public class ProductEntity {
 	public void setBusiness(BusinessEntity business) {
 		this.business = business;
 	}
+	public Set<SubCategoryEntity> getSubCategories() {
+		return subCategories;
+	}
+	public void setSubCategories(Set<SubCategoryEntity> subCategories) {
+		this.subCategories = subCategories;
+	}
 
 	public Product toModel() {
 		Product model = new Product();
@@ -99,7 +121,12 @@ public class ProductEntity {
 		model.setDescription(this.description);
 		model.setPrice(this.price);
 		model.setPhoto(this.photo);
-		model.setBusiness(this.business.toModel());
+		
+		if(this.business != null )
+			model.setBusiness(this.business.toModel());
+		
+		if(this.subCategories != null )
+			model.setSubCategories(this.subCategories.stream().map(a -> a.toModel()).collect(Collectors.toSet()));
 		
 		return model;
 	}

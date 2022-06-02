@@ -1,14 +1,18 @@
 package com.ecommerce.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-import com.ecommerce.models.Category;
 import com.ecommerce.models.SubCategory;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_subcategoria")
@@ -21,7 +25,9 @@ public class SubCategoryEntity {
 	@Column(name = "nome", length = 100)
 	private String name;
 	
-	//private List<Product> products; 
+	@JsonIgnore
+	@ManyToMany(mappedBy = "subCategories")
+	private Set<ProductEntity> products = new HashSet<>(); 
 	
 	public SubCategoryEntity() {}
 	
@@ -46,13 +52,13 @@ public class SubCategoryEntity {
 	public void setName(String name) {
 		this.name = name;
 	}
-	/*public List<Product> getProducts() {
+	public Set<ProductEntity> getProducts() {
 		return products;
 	}
-	public void setProducts(List<Product> products) {
+	public void setProducts(Set<ProductEntity> products) {
 		this.products = products;
-	}*/
-
+	}
+	
 	public SubCategory toModel() {
 		SubCategory model = new SubCategory();
 		
