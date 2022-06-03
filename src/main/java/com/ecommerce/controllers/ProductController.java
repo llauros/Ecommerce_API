@@ -53,9 +53,11 @@ public class ProductController {
 	public ResponseEntity<ProductPresenter> create(@RequestBody ProductParameter parameter) {
 		
 		if (parameter != null) {
-			Product model = parameter.toModel();
+			Product result = this.service.create(parameter.toModel());
 
-			return new ResponseEntity(new ProductPresenter(this.service.create(model)), HttpStatus.CREATED);	
+			if(result != null) {
+				return new ResponseEntity<ProductPresenter>(new ProductPresenter(result), HttpStatus.CREATED);
+			}		
 		}
 		
 		return new ResponseEntity(HttpStatus.OK);

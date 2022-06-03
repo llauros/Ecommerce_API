@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.ecommerce.models.SubCategory;
@@ -25,6 +27,10 @@ public class SubCategoryEntity {
 	@Column(name = "nome", length = 100)
 	private String name;
 	
+	@ManyToOne
+	@JoinColumn(name = "id_categoria")
+	private CategoryEntity category;
+	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "subCategories")
 	private Set<ProductEntity> products = new HashSet<>(); 
@@ -32,12 +38,15 @@ public class SubCategoryEntity {
 	public SubCategoryEntity() {}
 	
 	public SubCategoryEntity (SubCategory model) {
-		this.id = model.getId();
 		this.name = model.getName();
+		
+		if(model.getCategory() != null)
+			this.category = new CategoryEntity(model.getCategory());
 	}	
 	
-	public SubCategoryEntity (String name) {
+	public SubCategoryEntity (String name, CategoryEntity category) {
 		this.name = name;
+		this.category = category;
 	}
 	
 	public Long getId() {
@@ -51,6 +60,12 @@ public class SubCategoryEntity {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public CategoryEntity getCategory() {
+		return category;
+	}
+	public void setCategory(CategoryEntity category) {
+		this.category = category;
 	}
 	public Set<ProductEntity> getProducts() {
 		return products;

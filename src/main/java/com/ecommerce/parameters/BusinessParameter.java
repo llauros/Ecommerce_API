@@ -4,10 +4,17 @@ import com.ecommerce.models.Business;
 
 public class BusinessParameter {
 	
+	private Long id;
 	private String name;
 	private String description;
 	private UserParameter ownerUser;
 	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -30,11 +37,12 @@ public class BusinessParameter {
 	public Business toModel() {
 		Business model = new Business();
 		
+		model.setId(this.id);
 		model.setName(this.name);
 		model.setDescription(this.description);
 		
 		if(this.ownerUser != null)
-			model.setOwnerUser(ownerUser.toModel());
+			model.setOwnerUser(this.ownerUser.toModel());
 				
 		return model;
 	}

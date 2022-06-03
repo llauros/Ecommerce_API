@@ -29,34 +29,21 @@ import com.ecommerce.repositories.UserRepository;
 //@Profile(value = { "dev", "prod", "test" })
 public class DatabaseSeeding implements CommandLineRunner {
 
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private BusinessRepository businessRepository;
-
-	@Autowired
-	private OrderRepository orderRepository;
-
-	@Autowired
-	private ProductRepository productRepository;
-
-	@Autowired
-	private CategoryRepository categoryRepository;
-
-	@Autowired
-	private SubCategoryRepository subCategoryRepository;
+	@Autowired private UserRepository userRepository;
+	@Autowired private BusinessRepository businessRepository;
+	@Autowired private OrderRepository orderRepository;
+	@Autowired private ProductRepository productRepository;
+	@Autowired private CategoryRepository categoryRepository;
+	@Autowired private SubCategoryRepository subCategoryRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		List<UserEntity> usuarios = dbsUsers();
-		List<BusinessEntity> negocios = dbsBusiness(usuarios);
-
-		// dbsCategory();
-
-		List<SubCategoryEntity> subCategorias = dbsSubCategory();
-		dbsProduct(negocios, subCategorias);
+		/*List<UserEntity> usuarios = dbsUsers();
+		List<BusinessEntity> negocios = dbsBusiness(usuarios);	
+		List<CategoryEntity> cetegorias = dbsCategory();
+		List<SubCategoryEntity> subCategorias = dbsSubCategory(cetegorias);
+		dbsProduct(negocios, subCategorias);*/
 
 		// dbsOrders(usuarios);
 
@@ -84,16 +71,18 @@ public class DatabaseSeeding implements CommandLineRunner {
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 	}
 
-	public void dbsCategory() {
+	public List<CategoryEntity> dbsCategory() {
 		CategoryEntity c1 = new CategoryEntity("Moda");
 		CategoryEntity c2 = new CategoryEntity("Eletrônicos");
-		categoryRepository.saveAll(Arrays.asList(c1, c2));
+		CategoryEntity c3 = new CategoryEntity("Alimentos & Bebidas");
+		return categoryRepository.saveAll(Arrays.asList(c1, c2, c3));
 	}// Populando tabela de Categoria com dados fictícios!
 	
-	public List<SubCategoryEntity>dbsSubCategory() {
-		SubCategoryEntity s1 = new SubCategoryEntity("Moda Feminina");
-		SubCategoryEntity s2 = new SubCategoryEntity("Moda Masculina");
-		SubCategoryEntity s3 = new SubCategoryEntity("Smart");
+	public List<SubCategoryEntity> dbsSubCategory(List<CategoryEntity> cetegorias) {
+		SubCategoryEntity s1 = new SubCategoryEntity("Moda Feminina", cetegorias.get(0));
+		SubCategoryEntity s2 = new SubCategoryEntity("Moda Masculina", cetegorias.get(0));
+		SubCategoryEntity s3 = new SubCategoryEntity("Smart", cetegorias.get(1));
+		SubCategoryEntity s4 = new SubCategoryEntity("Pãezinhos", cetegorias.get(2));
 		return subCategoryRepository.saveAll(Arrays.asList(s1, s2, s3));
 	}// Populando tabela de SubCategoria com dados fictícios!
 

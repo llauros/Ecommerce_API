@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ecommerce.entities.CategoryEntity;
 import com.ecommerce.entities.SubCategoryEntity;
 import com.ecommerce.models.SubCategory;
 import com.ecommerce.repositories.CategoryRepository;
@@ -46,10 +47,17 @@ public class SubCategoryBaseService implements SubCategoryService {
 	@Override
 	public SubCategory create(SubCategory model) {
 		
-		if(model != null) {
-			SubCategoryEntity entity = new SubCategoryEntity(model);
+		if(model != null && model.getCategory() != null) {
 			
-			return repository.save(entity).toModel();
+			Optional<CategoryEntity> categoryResult = categoryRepository.findById(model.getCategory().getId());
+			
+			if(categoryResult.isPresent()) {
+				
+				SubCategoryEntity entity = new SubCategoryEntity(model);
+				entity.setCategory(categoryResult.get());
+				
+				return repository.save(entity).toModel();
+			}
 		}
 
 		return null;

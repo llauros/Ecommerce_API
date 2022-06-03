@@ -53,9 +53,11 @@ public class SubCategoryController {
 	public ResponseEntity<SubCategoryPresenter> create(@RequestBody SubCategoryParameter parameter) {
 		
 		if (parameter != null) {
-			SubCategory model = parameter.toModel();
+			SubCategory model = this.service.create(parameter.toModel());
 
-			return new ResponseEntity(new SubCategoryPresenter(this.service.create(model)), HttpStatus.CREATED);	
+			if(model != null) {
+				return new ResponseEntity<SubCategoryPresenter>(new SubCategoryPresenter(model), HttpStatus.CREATED);	
+			}	
 		}
 		
 		return new ResponseEntity(HttpStatus.OK);
