@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: 'accountbusinessmanager'
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost

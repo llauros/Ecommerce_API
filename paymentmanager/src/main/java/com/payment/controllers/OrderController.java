@@ -1,4 +1,4 @@
-package com.ecommerce.controllers;
+package com.payment.controllers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecommerce.entities.OrderEntity;
-import com.ecommerce.parameters.OrderParameter;
-import com.ecommerce.presenters.OrderPresenter;
-import com.ecommerce.services.OrderService;
+import com.payment.entities.OrderEntity;
+import com.payment.parameters.OrderParameter;
+import com.payment.presenters.OrderPresenter;
+import com.payment.services.OrderService;
 
 import lib.easymart.models.Order;
 

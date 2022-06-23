@@ -42,14 +42,14 @@ public class DatabaseSeeding implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		List<UserEntity> usuarios = dbsUsers();
+		/*List<UserEntity> usuarios = dbsUsers();
 		List<BusinessEntity> negocios = dbsBusiness(usuarios);	
 		List<CategoryEntity> cetegorias = dbsCategory();
 		List<SubCategoryEntity> subCategorias = dbsSubCategory(cetegorias);	
 		List<ProductEntity> produtos = dbsProduct(negocios, subCategorias);
 		List<OrderEntity> pedidos = dbsOrders(usuarios);
 
-		dbsOrderProduct(pedidos, produtos);
+		dbsOrderProduct(pedidos, produtos);*/
 	}
 	
 	private List<OrderEntity> dbsOrders(List<UserEntity> users) {

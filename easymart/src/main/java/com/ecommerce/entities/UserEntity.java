@@ -33,12 +33,12 @@ public class UserEntity {
 	@Column(name = "senha")
 	private String password;
 	
-	@OneToOne(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+	/*@OneToOne(mappedBy = "ownerUser", cascade = CascadeType.ALL)
 	private BusinessEntity business;
 	
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL)
-	private List<OrderEntity> orders;/* = new ArrayList<>();*/
+	private List<OrderEntity> orders;*/
 	
 	public UserEntity() {}
 
@@ -72,11 +72,11 @@ public class UserEntity {
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
 	
-	public BusinessEntity getBusiness() {return business;}
+	/*public BusinessEntity getBusiness() {return business;}
 	public void setBusiness(BusinessEntity business) {this.business = business;}
 	
 	public List<OrderEntity> getOrders() {return orders;}
-	public void setOrders(List<OrderEntity> orders) {this.orders = orders;}
+	public void setOrders(List<OrderEntity> orders) {this.orders = orders;}*/
 
 	public User toModel() {
 		User model = new User();

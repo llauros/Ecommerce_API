@@ -29,9 +29,9 @@ public class BusinessEntity {
 	@Column(name = "descricao")
 	private String description;
 	
-	@OneToOne
+	/*@OneToOne
 	@JoinColumn(name = "proprietario")
-	private UserEntity ownerUser;
+	private UserEntity ownerUser;*/
 	
 	@OneToMany(mappedBy = "business", cascade = CascadeType.ALL)
 	private List<ProductEntity> products;
@@ -60,7 +60,7 @@ public class BusinessEntity {
 	public BusinessEntity(String name, String description, UserEntity ownerUser) {
 		this.name = name;
 		this.description = description;
-		this.ownerUser = ownerUser;
+		//this.ownerUser = ownerUser;
 	}
 
 	public Long getId() {
@@ -87,13 +87,13 @@ public class BusinessEntity {
 		this.description = description;
 	}
 	
-	public UserEntity getOwnerUser() {
+	/*public UserEntity getOwnerUser() {
 		return ownerUser;
 	}
 
 	public void setOwnerUser(UserEntity ownerUser) {
 		this.ownerUser = ownerUser;
-	}
+	}*/
 	
 	public List<ProductEntity> getProducts() {
 		return products;

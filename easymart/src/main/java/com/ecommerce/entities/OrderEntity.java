@@ -35,9 +35,9 @@ public class OrderEntity implements Serializable {
 	
 	private Integer orderStatus;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "cliente_id")
-	private UserEntity userClient;
+	private UserEntity userClient;*/
 	
 	@OneToMany(mappedBy = "id.order")
 	@JsonIgnore
@@ -49,8 +49,8 @@ public class OrderEntity implements Serializable {
 		if (model != null) 
 			this.moment = model.getMoment(); 
 			
-		if (model.getUserClient() != null) 
-			this.userClient = new UserEntity(model.getUserClient());
+		/*if (model.getUserClient() != null) 
+			this.userClient = new UserEntity(model.getUserClient());*/
 	}
 	
 	public OrderEntity(Instant moment, OrderStatus orderStatus, UserEntity userClient) {
@@ -79,12 +79,12 @@ public class OrderEntity implements Serializable {
 			this.orderStatus = orderStatus.getCode();
 		}		
 	}
-	public UserEntity getUserClient() {
+	/*public UserEntity getUserClient() {
 		return userClient;
 	}
 	public void setUserClient(UserEntity userClient) {
 		this.userClient = userClient;
-	}
+	}*/
 	public Set<OrderProductEntity> getProducts() {
 		return products;
 	}
