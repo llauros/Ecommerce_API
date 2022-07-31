@@ -6,32 +6,27 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.0</version>
+		<version>2.7.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.accountbusiness</groupId>
-	<artifactId>accountbusiness-manager</artifactId>
+	<groupId>com.payment</groupId>
+	<artifactId>payment-manager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>accountbusiness-manager</name>
-	<description>Micro serviço gerenciador de Contas - Negócios e Produtos</description>
+	<name>payment-manager</name>
+	<description> Payment manager microservice</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 
 		<dependency>
-			<groupId>com.ecommerce</groupId>
-			<artifactId>lib-ecommerce</artifactId>
+			<groupId>com.devcommerce</groupId>
+			<artifactId>lib-devcommerce</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -59,16 +54,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
-		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bootstrap</artifactId>
-		</dependency>
-		-->
 	</dependencies>
 
 	<build>
@@ -88,15 +73,4 @@
 		</plugins>
 	</build>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>2021.0.3</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 </project>

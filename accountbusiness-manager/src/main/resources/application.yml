@@ -1,9 +1,0 @@
-## __ WEB CONFIG
-server:
-  port: 8080
-  servlet:
-    context-path: /app
-    
-## __ CONFIG DATABASE AND JPA NO CONIG SERVER
-# Endereço repositŕio de configuração
-# https://github.com/llauros/microservice-repo

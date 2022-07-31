@@ -1,9 +1,10 @@
-package lib.easymart.models;
+package com.ecommerce.models;
 
-public class Category {
+public class SubCategory {
 	
 	private Long id;
 	private String name;
+	private Category category;
 	
 	public Long getId() {
 		return id;
@@ -16,6 +17,12 @@ public class Category {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Category getCategory() {
+		return category;
+	}
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 	
 }
